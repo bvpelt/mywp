@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ArticleService } from '../shared/services/article.service';
 import { Article } from '../shared/model/article.model';
 import { Observable } from 'rxjs';
@@ -10,12 +10,15 @@ import { Observable } from 'rxjs';
 })
 export class ArticleListComponent implements OnInit {
 
-  articles$: Observable<Article> = null;
+  @Input() categorieId: number = 0;
+
+  articles$: Observable<Article[]> = null;
 
   constructor(private articleService: ArticleService) { }
 
   ngOnInit(): void {
-    this.articles$ = this.articleService.getArticles();
+    console.log('Articlelist - catagorieId: ', this.categorieId);
+    this.articles$ = this.articleService.getArticles(this.categorieId);
   }
 
 }

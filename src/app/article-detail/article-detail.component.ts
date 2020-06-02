@@ -13,6 +13,7 @@ export class ArticleDetailComponent implements OnInit {
 
   article: Article = null;
   id: number = 0;
+
   constructor(private activatedRoute: ActivatedRoute,
     private articleService: ArticleService) { }
 

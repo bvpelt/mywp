@@ -1,31 +1,25 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Article } from '../model/article.model';
+import { Category } from '../model/category.model';
 import { Observable, of } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ArticleService {
-  url: string = 'http://localhost:3000/articles';
-  sub$: Observable<Article[] | any> = null;
+export class CategoryService {
+  url: string = 'http://localhost:3000/categories';
+  sub$: Observable<Category[] | any> = null;
 
   constructor(private http: HttpClient) { }
 
-  getArticles(categorieId: number): Observable<Article[] | any> {
+  getCategories(): Observable<Category[] | any> {
     let headers = new HttpHeaders()
       .set('content-type', 'application/json')
       .set('Cache-Control', 'public max-age=3 must-revalidate');
 
-    var url = this.url;
-    console.log('getArticles - categorieId: ', categorieId);
-    if (categorieId > 0) {
-      url += '?categoryId=' + categorieId;
-    }
-
     this.sub$ = this.http
-      .get<Article[]>(url, { 'headers': headers }).pipe(
+      .get<Category[]>(this.url, { 'headers': headers }).pipe(
         tap(result => console.log('Opgehaald via: ', this.url, ' result:', result)),
         catchError(err => {
           console.log('Geen API gevonden\nStart eerst de json-server met\n"npm run json-server"');
@@ -36,12 +30,12 @@ export class ArticleService {
     return this.sub$;
   }
 
-  getArticle(id: number): Observable<Article | any> {
+  getCategory(id: number): Observable<Category | any> {
     let headers = new HttpHeaders()
       .set('content-type', 'application/json')
       .set('Cache-Control', 'max-age=30 must-revalidate');
 
-    return this.http.get<Article>(`${this.url}/${id}`, { 'headers': headers })
+    return this.http.get<Category>(`${this.url}/${id}`, { 'headers': headers })
       .pipe(
         tap(result => console.log('Opgehaald via: ', this.url, '/', id, ' result:', result)),
         catchError(err => {
