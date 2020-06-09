@@ -1,11 +1,13 @@
-<h2>Articles</h2>
+<div class="container">
+    <h2>Articles</h2>
 
-<div class="list-group" *ngFor="let article of articles$ | async">
-    <div class="row">
-        <div class="col-sm">
-            <a class="list-group-item list-group-item-action" [routerLink]="['/article-detail', article.id]">
-                ({{ article.id}}) {{ article.title}}
-            </a>
+    <div class="list-group" *ngFor="let article of articles$ | async">
+        <div class="row">
+            <div class="col-sm">
+                <a class="list-group-item list-group-item-action" [routerLink]="['/article-detail', article.id]">
+                    ({{ article.id}}) {{ article.title}}
+                </a>
+            </div>
         </div>
     </div>
 </div>

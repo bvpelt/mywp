@@ -1,15 +1,16 @@
-<h2>Catagories</h2>
+<div class="container">
+    <h2>Catagories</h2>
 
-<div class="list-group" *ngFor="let categorie of catagories$ | async">
-    <div class="row">
-        <div class="col-sm">
-            <a class="list-group-item list-group-item-action">
-                ({{ categorie.id}}) {{ categorie.name}}
-            </a>
+    <div class="list-group" *ngFor="let categorie of catagories$ | async">
+        <div class="row">
+            <div class="col-sm">
+                <a class="list-group-item list-group-item-action">
+                    ({{ categorie.id}}) {{ categorie.name}}
+                </a>
+            </div>
         </div>
-
-    </div>
-    <div class="row">
-        <app-article-list [categorieId]="categorie.id"></app-article-list>
+        <div class="row">
+            <app-article-list [categorieId]="categorie.id"></app-article-list>
+        </div>
     </div>
 </div>
